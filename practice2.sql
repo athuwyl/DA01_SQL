@@ -68,3 +68,7 @@ HAVING COUNT(DISTINCT follower_id)
 ORDER BY COUNT(DISTINCT follower_id)
 
 --ex12:leetcode-classes-more-than-5-students.
+SELECT class
+FROM Courses
+GROUP BY class
+HAVING COUNT(student) > 5
