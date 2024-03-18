@@ -40,3 +40,28 @@ group by actor_name
 order by movies desc
 
 --question 6: 
+select count(a.address)
+from address as a
+left join customer as b
+on a.address_id = b.address_id
+where b.customer_id is null
+
+--question 7:
+select a.city, sum(d.amount) as amount
+from city as a
+
+--ques 8: 
+select a.city || ',' || b.country, 
+sum(e.amount) as amount
+from city as a
+join country as b
+on a.country_id = b.country_id
+join address as c
+on a.city_id = c.city_id
+join customer as d
+on d.address_id = c.address_id
+join payment as e
+on e.customer_id = d.customer_id
+group by a.city, b.country
+order by amount 
+
