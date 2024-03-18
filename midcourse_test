@@ -3,3 +3,40 @@ select distinct replacement_cost
 from film
 order by replacement_cost
 
+--question 2:
+select 
+case
+when replacement_cost between 9.99 and 19.99 then 'low'
+when replacement_cost between 20 and 24.99 then 'medium'
+when replacement_cost between 25 and 29.99 then 'high'
+end as category, count(*) as so_luong
+from film
+group by category
+
+--question 3: 
+select a.title, a.length, c.name
+from film as a
+join film_category as b on a.film_id = b.film_id
+join category as c on b.category_id = c.category_id
+where c.name in ('Drama', 'Sports')
+order by a.length desc
+
+
+--question 4: 
+select c.name, count(a.title) as so_luong
+from film as a
+join film_category as b on a.film_id = b.film_id
+join category as c on b.category_id = c.category_id
+group by c.name
+order by so_luong desc
+
+--question 5: 
+select a.first_name || a.last_name as actor_name, 
+count(b.film_id) as movies
+from actor as a
+join film_actor as b
+on a.actor_id = b.actor_id
+group by actor_name
+order by movies desc
+
+--question 6: 
